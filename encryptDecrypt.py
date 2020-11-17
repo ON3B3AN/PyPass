@@ -1,19 +1,15 @@
-import csv
 from cryptography.fernet import Fernet
-from pathlib import Path
 
-cwd = Path.cwd()
+rm_media_path = input("Enter drive letter for removable media: ").upper() + ":\\"
 
 
 def generate_key():
     """
     Generates a key and save it into a file
     """
-    print("Generating secret.key...")
-    print("It is highly recommended to store the secret.key on removable media (USB)")
-    key_path = input("Enter the path to store the secret.key (I.E.; D:\\\): ")
+    print("Generating secret key...")
     key = Fernet.generate_key()
-    with open(f"{key_path}secret.key", "wb") as key_file:
+    with open(rm_media_path + "secret.key", "wb") as key_file:
         key_file.write(key)
 
 
@@ -21,32 +17,27 @@ def load_key():
     """
     Load the previously generated key
     """
-    print("Loading secret.key...")
-    key_path = input("Enter the path to the secret.key: ")
-    return open(f"{key_path}secret.key", "rb").read()
+    return open(rm_media_path + "secret.key", "rb").read()
 
 
-def encrypt_password(password):
+def encrypt_password(password, output_file):
     """
-    Encrypts a message
+    Encrypts a password
     """
     key = load_key()
     encoded_password = password.encode()
     f = Fernet(key)
-    with open("../passwordManager/passwordManager/password_list.csv", "w", newline="") as output_file:
-        output_writer = csv.writer(output_file)
-        encrypted_password = f.encrypt(encoded_password)
-        output_writer.writerow([encrypted_password])
+    encrypted_password = f.encrypt(encoded_password)
+    output_file.write(encrypted_password)
 
 
-def decrypt_message():
+def decrypt_passwords():
     """
-    Decrypts an encrypted message
+    Decrypts encrypted passwords
     """
     key = load_key()
     f = Fernet(key)
-    with open('../passwordManager/passwordManager/password_list.csv') as input_file:
-        input_reader = csv.reader(input_file)
-        for row in input_reader:
-            decrypted_password = f.decrypt(row)
-            print(decrypted_password.decode())
+    input_file = open('.\\password_list.bin', "rb").read()
+    # for byte in input_file:
+    decrypted_password = f.decrypt(bytes(input_file))
+    print(decrypted_password.decode())

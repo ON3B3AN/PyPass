@@ -30,7 +30,7 @@ def main_menu():
     if option == "1":
         passGen.generate_passwords()
     elif option == "2":
-        crypt.decrypt_message()
+        crypt.decrypt_passwords()
     elif option == "3":
         sys.exit()
 

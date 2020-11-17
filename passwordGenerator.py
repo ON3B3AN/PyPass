@@ -6,6 +6,7 @@ import random
 
 def generate_passwords():
     crypt.generate_key()
+    output_file = open(".\\password_list.bin", "wb")
     uppercase_letters = "ABCDEFGHIJKLNMOPQRSTUVWXYZ"
     lowercase_letters = uppercase_letters.lower()
     digits = "0123456789"
@@ -57,7 +58,7 @@ def generate_passwords():
             i += 1
             pwd = "".join(random.sample(password, length))
             if test.validate_password_strength(pwd):
-                crypt.encrypt_password(pwd)
+                crypt.encrypt_password(pwd, output_file)
                 count += 1
             else:
                 i -= 1
