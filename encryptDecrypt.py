@@ -29,6 +29,7 @@ def encrypt_password(password, output_file):
     f = Fernet(key)
     encrypted_password = f.encrypt(encoded_password)
     output_file.write(encrypted_password)
+    output_file.write("\n".encode())
 
 
 def decrypt_passwords():
@@ -38,6 +39,7 @@ def decrypt_passwords():
     key = load_key()
     f = Fernet(key)
     input_file = open('.\\password_list.bin', "rb").read()
-    # for byte in input_file:
-    decrypted_password = f.decrypt(bytes(input_file))
-    print(decrypted_password.decode())
+    print("")
+    for password in input_file.splitlines():
+        decrypted_password = f.decrypt(bytes(password))
+        print(decrypted_password.decode())
