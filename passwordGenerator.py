@@ -38,7 +38,7 @@ def generate_passwords():
             chars = add_ambiguous_characters(input("Use ambiguous characters? (y/n): "))
         return chars
 
-    def generate_password(syms, chars, count=0):
+    def generate_password(syms, chars, hit=0, miss=0):
         password = ""
         if upper:
             password += uppercase_letters
@@ -59,10 +59,12 @@ def generate_passwords():
             pwd = "".join(random.sample(password, length))
             if test.validate_password_strength(pwd):
                 crypt.encrypt_password(pwd, output_file)
-                count += 1
+                hit += 1
             else:
                 i -= 1
-        print("\nPasswords successfully generated " + "{" + colored(str(count), "green", attrs=['bold']) + "}\n")
+                miss += 1
+        print("\nPasswords accepted " + "{" + colored(str(hit), "green", attrs=['bold']) + "}." +
+              " Passwords rejected " + "{" + colored(str(miss), "red", attrs=['bold']) + "}." + "\n")
 
     generate_password(add_symbols(input("Use symbols? (y/n): ")),
                       add_ambiguous_characters(input("Use ambiguous characters? (y/n): ")))
