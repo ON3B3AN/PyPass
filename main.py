@@ -25,18 +25,28 @@ def main_menu():
     1. Generate Passwords
     2. View Passwords
     3. Create Credential Dictionary
-    4. Exit
+    4. Modify path configurations
+    5. Exit
     """)
     option = input("Enter an option: ")
     if option == "1":
-        # passGen.generate_passwords()
         passGen.generate_passwords()
     elif option == "2":
-        # crypt.decrypt_passwords()
         crypt.decrypt_passwords()
     elif option == "3":
         pass
     elif option == "4":
+        print(colored("\nFile Path Configuration Menu", "grey", attrs=['bold', 'underline']))
+        print("""
+    1. Modify the removable disk path
+    2. Modify output file path
+        """)
+        option = input("Enter an option: ")
+        if option == "1":
+            pass
+        elif option == "2":
+            pass
+    elif option == "5":
         sys.exit()
 
 
