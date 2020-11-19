@@ -24,16 +24,18 @@ def main_menu():
     print("""
     1. Generate Passwords
     2. View Passwords
-    3. 
+    3. Create Credential Dictionary
     4. Exit
     """)
     option = input("Enter an option: ")
     if option == "1":
+        # passGen.generate_passwords()
         passGen.generate_passwords()
     elif option == "2":
+        # crypt.decrypt_passwords()
         crypt.decrypt_passwords()
     elif option == "3":
-        crypt.decrypt_passwords()
+        pass
     elif option == "4":
         sys.exit()
 

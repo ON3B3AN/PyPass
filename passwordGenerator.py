@@ -1,14 +1,35 @@
 import passwordStrengthTest as test
 from termcolor import colored
-import encryptDecrypt as crypt
+from encryptDecrypt import *
+# import encryptDecrypt as crypt
 import random
+from pathlib import Path
+import os
 
-output_file_path = input("Enter the directory to store your password list: ")
+
+# def get_output_file_path(answer):
+#     # output_file_path_fn = Path(input("Enter the directory to store your password list, make sure you have a trailing slash at the end of the path: "))
+#
+#     def check_directory_path(path):
+#         if path.exists():
+#             return True
+#         else:
+#             return False
+#
+#     if check_directory_path(answer):
+#         output_file = open(f"{answer}password_list.bin", "wb")
+#     else:
+#         get_output_file_path()
+#
+#     return output_file
 
 
 def generate_passwords():
-    crypt.generate_key()
-    output_file = open(f"{output_file_path}\\password_list.bin", "wb")
+    generate_key()
+    # output_file = get_output_file_path()
+    output_file_path = get_output_file_path()
+    output_file = open(f"{output_file_path}{filePathSeparator}password_list.bin","wb")
+    print("[passwordGenerator.py] The output_file is:", output_file)
     uppercase_letters = "ABCDEFGHIJKLNMOPQRSTUVWXYZ"
     lowercase_letters = uppercase_letters.lower()
     digits = "0123456789"
@@ -17,8 +38,21 @@ def generate_passwords():
 
     upper, lower, nums = True, True, True
 
-    length = int(input("Enter your desired password length (min: 8): "))
     number = int(input("Enter the number of passwords to generate: "))
+
+    lenLoopStop = False
+    while not lenLoopStop:
+        try:
+            length = int(input("Enter your desired password length (min: 8): "))
+        except ValueError as e:
+            print("[passwordGenerator.py] You did not enter a valid Integer; please try again!")
+            continue
+
+        if length < 8:
+            print("[passwordGenerator.py] Length of password is", length, ", which is less than 8! Please try again...")
+        else:
+            lenLoopStop = True
+
 
     def add_symbols(answer):
         if answer.upper() == "Y" or answer.lower() == "y":
@@ -60,7 +94,7 @@ def generate_passwords():
             i += 1
             pwd = "".join(random.sample(password, length))
             if test.validate_password_strength(pwd):
-                crypt.encrypt_password(pwd, output_file)
+                encrypt_password(pwd, output_file)
                 hit += 1
             else:
                 i -= 1
@@ -70,3 +104,4 @@ def generate_passwords():
 
     generate_password(add_symbols(input("Use symbols? (y/n): ")),
                       add_ambiguous_characters(input("Use ambiguous characters? (y/n): ")))
+
