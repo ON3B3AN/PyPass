@@ -3,10 +3,12 @@ from termcolor import colored
 import encryptDecrypt as crypt
 import random
 
+output_file_path = input("Enter the directory to store your password list: ")
+
 
 def generate_passwords():
     crypt.generate_key()
-    output_file = open(".\\password_list.bin", "wb")
+    output_file = open(f"{output_file_path}\\password_list.bin", "wb")
     uppercase_letters = "ABCDEFGHIJKLNMOPQRSTUVWXYZ"
     lowercase_letters = uppercase_letters.lower()
     digits = "0123456789"

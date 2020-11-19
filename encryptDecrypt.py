@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+import passwordGenerator as gen
 
 rm_media_path = input("Enter drive letter for removable media: ").upper() + ":\\"
 
@@ -38,7 +39,7 @@ def decrypt_passwords():
     """
     key = load_key()
     f = Fernet(key)
-    input_file = open('.\\password_list.bin', "rb").read()
+    input_file = open(f'{gen.output_file_path}\\password_list.bin', "rb").read()
     print("")
     for password in input_file.splitlines():
         decrypted_password = f.decrypt(bytes(password))

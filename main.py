@@ -24,7 +24,8 @@ def main_menu():
     print("""
     1. Generate Passwords
     2. View Passwords
-    3. Exit
+    3. 
+    4. Exit
     """)
     option = input("Enter an option: ")
     if option == "1":
@@ -32,6 +33,8 @@ def main_menu():
     elif option == "2":
         crypt.decrypt_passwords()
     elif option == "3":
+        crypt.decrypt_passwords()
+    elif option == "4":
         sys.exit()
 
 
