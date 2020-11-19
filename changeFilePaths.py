@@ -1,9 +1,8 @@
-import pmConfig as cfg
 import platform
 from pathlib import Path
 import json
 
-configFile = open('pmConfig.json','r')
+configFile = open('pmConfig.json', 'r')
 filePath = json.load(configFile)
 configFile.close()
 
