@@ -1,12 +1,7 @@
-# from passwordGenerator import *
-# import passwordGenerator as genPass
-# from passwordGenerator import *
 from cryptography.fernet import Fernet
 from pathlib import Path
 import platform
 import json
-
-# print("You are running", platform.system())
 
 if platform.system() == "Windows":
     filePathSeparator = "\\"
@@ -15,39 +10,23 @@ else:
     filePathSeparator = "/"
     rmDiskSuffix = "/"
 
-# print("filePathSuffix:", filePathSeparator)
-# print("rmDiskSuffix:", rmDiskSuffix)
 
-configFile = open('pmConfig.json','r')
-filePaths = json.load(configFile)
-configFile.close()
+def load_json_config():
+    configFile = open('pmConfig.json','r')
+    filePaths = json.load(configFile)
+    configFile.close()
+    return filePaths
 
-rm_media_path = Path(filePaths["rm_media_path"])
+jsonConfig = load_json_config()
+rm_media_path = Path(jsonConfig["rm_media_path"])
 print("Configured Removable Media File Path:", rm_media_path)
-output_file_path = Path(filePaths["output_file_path"])
+output_file_path = Path(jsonConfig["output_file_path"])
 print("Configured Password Output File Path:", output_file_path)
-
-# rmFileLoopStop = True
-# while rmFileLoopStop:
-#     rm_media_path = Path(input("Enter drive letter for removable media: ") + rmDiskSuffix)
-#     print("The path for removable media is:", rm_media_path)
-#     if rm_media_path.exists():
-#         rmFileLoopStop = False
-#     else:
-#         print("Oops, that's not a valid file path. Please try again!")
-#
-#
-# outputFileLoopStop = True
-# while outputFileLoopStop:
-#     output_file_path = Path(input("Enter file path for output file pwd list: ") + filePathSeparator)
-#     print("The output path for the passwords list is:", output_file_path)
-#     if output_file_path.exists():
-#         outputFileLoopStop = False
-#     else:
-#         print("Oops, that's not a valid file path. Please try again!")
 
 
 def get_output_file_path():
+    jsonConfig = load_json_config()
+    output_file_path = Path(jsonConfig["output_file_path"])
     return output_file_path
 
 
@@ -57,8 +36,8 @@ def generate_key():
     """
     print("Generating secret key...")
     key = Fernet.generate_key()
-    # old open syntax: open(rm_media_path + "secret.key", "wb") - changed + to / to append key to POSIX path: https://stackoverflow.com/questions/48190959/how-do-i-append-a-string-to-a-path-in-python
-    with open(rm_media_path / "secret.key", "wb") as key_file:
+    rm_media_path = load_json_config()["rm_media_path"]
+    with open(rm_media_path + filePathSeparator + "secret.key", "wb") as key_file:
         key_file.write(key)
 
 
@@ -66,7 +45,8 @@ def load_key():
     """
     Load the previously generated key
     """
-    return open(rm_media_path / "secret.key", "rb").read()
+    rm_media_path = load_json_config()["rm_media_path"]
+    return open(rm_media_path + filePathSeparator + "secret.key", "rb").read()
 
 
 def encrypt_password(password, output_file):
@@ -88,6 +68,7 @@ def decrypt_passwords():
     key = load_key()
     f = Fernet(key)
     # input_file = open(f'{output_file_path}\\password_list.bin', "rb").read()
+    output_file_path = load_json_config()["output_file_path"]
     input_file = open(f'{output_file_path}{filePathSeparator}password_list.bin', "rb").read()
     print("")
     for password in input_file.splitlines():

@@ -7,23 +7,6 @@ from pathlib import Path
 import os
 
 
-# def get_output_file_path(answer):
-#     # output_file_path_fn = Path(input("Enter the directory to store your password list, make sure you have a trailing slash at the end of the path: "))
-#
-#     def check_directory_path(path):
-#         if path.exists():
-#             return True
-#         else:
-#             return False
-#
-#     if check_directory_path(answer):
-#         output_file = open(f"{answer}password_list.bin", "wb")
-#     else:
-#         get_output_file_path()
-#
-#     return output_file
-
-
 def generate_passwords():
     generate_key()
     # output_file = get_output_file_path()
@@ -38,13 +21,24 @@ def generate_passwords():
 
     upper, lower, nums = True, True, True
 
-    number = int(input("Enter the number of passwords to generate: "))
+    numLoopStop = False
+    while not numLoopStop:
+        try:
+            number = int(input("Enter the number of passwords to generate: "))
+        except:
+            print("[passwordGenerator.py] You did not enter a valid Integer; please try again!")
+            continue
+
+        if not number > 1:
+            print("[passwordGenerator.py] Number of passwords must be more than 1! Please try again...")
+        else:
+            numLoopStop = True
 
     lenLoopStop = False
     while not lenLoopStop:
         try:
             length = int(input("Enter your desired password length (min: 8): "))
-        except ValueError as e:
+        except:
             print("[passwordGenerator.py] You did not enter a valid Integer; please try again!")
             continue
 
