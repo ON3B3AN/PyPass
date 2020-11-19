@@ -1,6 +1,7 @@
 import passwordGenerator as passGen
 from termcolor import colored
 import encryptDecrypt as crypt
+import changeFilePaths as fPath
 import sys
 
 
@@ -43,9 +44,9 @@ def main_menu():
         """)
         option = input("Enter an option: ")
         if option == "1":
-            pass
+            fPath.changeRmMediaPath()
         elif option == "2":
-            pass
+            fPath.changePwdOutputFilePath()
     elif option == "5":
         sys.exit()
 

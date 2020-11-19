@@ -4,8 +4,9 @@
 from cryptography.fernet import Fernet
 from pathlib import Path
 import platform
+import json
 
-print("You are running", platform.system())
+# print("You are running", platform.system())
 
 if platform.system() == "Windows":
     filePathSeparator = "\\"
@@ -14,31 +15,36 @@ else:
     filePathSeparator = "/"
     rmDiskSuffix = "/"
 
-print("filePathSuffix:", filePathSeparator)
-print("rmDiskSuffix:", rmDiskSuffix)
+# print("filePathSuffix:", filePathSeparator)
+# print("rmDiskSuffix:", rmDiskSuffix)
 
-# Path differences for Windows vs. Mac and Linux -- keep for future reference if needed
-# rm_media_path = input("Enter drive letter or path for removable media: ").upper() + ":\\"
-# rm_media_path = input("Enter drive letter or path for removable media: ") + "/"
+configFile = open('pmConfig.json','r')
+filePaths = json.load(configFile)
+configFile.close()
 
-rmFileLoopStop = True
-while rmFileLoopStop:
-    rm_media_path = Path(input("Enter drive letter for removable media: ") + rmDiskSuffix)
-    print("The path for removable media is:", rm_media_path)
-    if rm_media_path.exists():
-        rmFileLoopStop = False
-    else:
-        print("Oops, that's not a valid file path. Please try again!")
+rm_media_path = Path(filePaths["rm_media_path"])
+print("Configured Removable Media File Path:", rm_media_path)
+output_file_path = Path(filePaths["output_file_path"])
+print("Configured Password Output File Path:", output_file_path)
 
-
-outputFileLoopStop = True
-while outputFileLoopStop:
-    output_file_path = Path(input("Enter file path for output file pwd list: ") + filePathSeparator)
-    print("The output path for the passwords list is:", output_file_path)
-    if output_file_path.exists():
-        outputFileLoopStop = False
-    else:
-        print("Oops, that's not a valid file path. Please try again!")
+# rmFileLoopStop = True
+# while rmFileLoopStop:
+#     rm_media_path = Path(input("Enter drive letter for removable media: ") + rmDiskSuffix)
+#     print("The path for removable media is:", rm_media_path)
+#     if rm_media_path.exists():
+#         rmFileLoopStop = False
+#     else:
+#         print("Oops, that's not a valid file path. Please try again!")
+#
+#
+# outputFileLoopStop = True
+# while outputFileLoopStop:
+#     output_file_path = Path(input("Enter file path for output file pwd list: ") + filePathSeparator)
+#     print("The output path for the passwords list is:", output_file_path)
+#     if output_file_path.exists():
+#         outputFileLoopStop = False
+#     else:
+#         print("Oops, that's not a valid file path. Please try again!")
 
 
 def get_output_file_path():
