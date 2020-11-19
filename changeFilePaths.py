@@ -1,4 +1,3 @@
-import pmConfig as cfg
 import platform
 from pathlib import Path
 import json
