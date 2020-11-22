@@ -52,3 +52,15 @@ def changePwdOutputFilePath():
             outputFileLoopStop = False
         else:
             print("Oops, that's not a valid file path. Please try again!")
+
+
+def checkConfigPaths():
+    if filePath["rm_media_path"] == "":
+        changeRmMediaPath()
+    else:
+        print("Path for removable media is present!")
+
+    if filePath["output_file_path"] == "":
+        changePwdOutputFilePath()
+    else:
+        print("Path for password list file is present!")
