@@ -3,6 +3,7 @@ import os
 import json
 from databaseConnection import create_connection, create_credentials, clear_password_db
 from passwordGenerator import generate_passwords
+from termcolor import colored
 
 
 def generate_credential_dir(update):
@@ -10,6 +11,8 @@ def generate_credential_dir(update):
 ***********************************************************************************
                                Instructions:
   • Create and save a csv file that contains usernames and websites in that order
+  • If appending to an existing Credential Dictionary,
+    then csv that contains usernames and websites must only contain NEW entries
 ***********************************************************************************
         """)
 
@@ -29,7 +32,7 @@ def generate_credential_dir(update):
         if os.path.exists(user_filePath) and os.path.isfile(user_filePath) and user_filePath.endswith(".csv"):
             fPathLoopStop = True
         else:
-            print("Oops, you didn't enter a valid file path/file name. Please try again!")
+            print(colored("Oops, you didn't enter a valid file path/file name. Please try again!", "red", attrs=['bold']))
 
     # open/read username and website list
     userFile = open(user_filePath, 'r')
@@ -53,7 +56,7 @@ def generate_credential_dir(update):
         passwordFileData = list(password_list)
         password_list.close()
     except:
-        print("\nIt looks like you haven't generated any passwords yet! Please select Option 1 for the password generator.")
+        print(colored("\nIt looks like you haven't generated any passwords yet! Please select Option 1 for the password generator.", "red", attrs=['bold']))
         quit()
 
     database = r"pythonsqlite.db"

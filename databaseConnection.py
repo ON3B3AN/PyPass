@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 from encryptDecrypt import decrypt_passwords
+from termcolor import colored
 
 
 def create_connection(db_file):
@@ -14,7 +15,7 @@ def create_connection(db_file):
         conn = sqlite3.connect(db_file)
         return conn
     except Error as e:
-        print(e)
+        print(colored(e, "red", attrs=['bold']))
 
     return conn
 
@@ -29,7 +30,7 @@ def create_table(conn, create_table_sql):
         c = conn.cursor()
         c.execute(create_table_sql)
     except Error as e:
-        print(e)
+        print(colored(e, "red", attrs=['bold']))
 
 
 def create_credentials(conn, creds):
@@ -69,7 +70,7 @@ def clear_password_db():
     Delete all rows in the tasks table
     :return:
     """
-    decision = input("You are about to clear your Credential Dictionary of all saved websites, usernames, and passwords.\n"
+    decision = input(colored("Warning! If Credential Dictionary already exists, then all saved websites, usernames, and passwords will be deleted!\n", "yellow", attrs=["bold"]) +
                      "Are you sure you want to do this? (y/n) ")
     loopStop = False
     while not loopStop:
@@ -80,7 +81,7 @@ def clear_password_db():
             cur = conn.cursor()
             cur.execute(sql)
             conn.commit()
-            print("Credential Dictionary has been cleared!")
+            print(colored("\nCredential Dictionary has been cleared!", "green", attrs=["bold"]))
             loopStop = True
             return True
         else:
@@ -107,7 +108,7 @@ def main():
         create_table(conn, sql_create_projects_table)
 
     else:
-        print("Error! cannot create the database connection.")
+        print(colored("Error! cannot create the database connection.", "red", attrs=['bold']))
 
 
 main()

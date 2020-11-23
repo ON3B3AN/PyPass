@@ -3,6 +3,7 @@ import changeFilePaths as fPath
 import credentialDirectoryGenerator as credDir
 import databaseConnection as db
 import sys
+from pathlib import Path
 
 
 def main_menu():
@@ -39,7 +40,10 @@ def main_menu():
             """)
         option = input("Enter an option [press <enter> for main menu]: ")
         if option == "1":
-            credDir.generate_credential_dir(True)
+            if Path(fPath.get_rm_media_path()).exists():
+                credDir.generate_credential_dir(True)
+            else:
+                print(colored("No Credential Dictionary was found. Please create one before adding to it.", "red", attrs=["bold"]))
         if option == "2":
             credDir.generate_credential_dir(False)
     elif option == "2":

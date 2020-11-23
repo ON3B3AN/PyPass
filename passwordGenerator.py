@@ -20,7 +20,7 @@ def generate_passwords(num, update):
     numLoopStop = False
     while not numLoopStop:
         if not num > 1:
-            print("Number of passwords must be more than 1! Please try again...")
+            print(colored("Number of passwords must be more than 1! Please try again...", "red", attrs=['bold']))
         else:
             numLoopStop = True
 
@@ -29,11 +29,11 @@ def generate_passwords(num, update):
         try:
             length = int(input("Enter your desired password length (min: 8): "))
         except:
-            print("You did not enter a valid Integer; please try again!")
+            print(colored("You did not enter a valid Integer; please try again!", "red", attrs=['bold']))
             continue
 
         if length < 8:
-            print("Length of password is", length, ", which is less than 8! Please try again...")
+            print(colored("Length of password is", length, ", which is less than 8! Please try again...", "red", attrs=['bold']))
         else:
             lenLoopStop = True
 
@@ -43,7 +43,7 @@ def generate_passwords(num, update):
         elif answer.upper() == "N" or answer.lower() == "n":
             syms = False
         else:
-            print("Input not recognized")
+            print(colored("Input not recognized", "red", attrs=['bold']))
             syms = add_symbols(input("Use symbols? (y/n): "))
         return syms
 
@@ -53,7 +53,7 @@ def generate_passwords(num, update):
         elif answer.upper() == "N" or answer.lower() == "n":
             chars = False
         else:
-            print("Input not recognized")
+            print(colored("Input not recognized", "red", attrs=['bold']))
             chars = add_ambiguous_characters(input("Use ambiguous characters? (y/n): "))
         return chars
 
