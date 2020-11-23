@@ -68,5 +68,15 @@ def main():
     else:
         print("Error! cannot create the database connection.")
 
+def clear_password_db(conn):
+    """
+    Delete all rows in the tasks table
+    :param conn: Connection to the SQLite database
+    :return:
+    """
+    sql = 'DELETE FROM credentials'
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
 
 main()

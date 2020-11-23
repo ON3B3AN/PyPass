@@ -3,6 +3,7 @@ import os
 import json
 from changeFilePaths import filePathSeparator
 from databaseConnection import create_connection, create_credentials
+from passwordGenerator import generate_passwords
 
 
 def generate_credential_dir():
@@ -10,7 +11,7 @@ def generate_credential_dir():
 
     while not fPathLoopStop:
         user_filePath = input("Please enter the full path with filename that contains your CSV file of usernames and websites: ")
-        if os.path.exists(user_filePath) and os.path.isfile(user_filePath):
+        if os.path.exists(user_filePath) and os.path.isfile(user_filePath) and user_filePath.endswith(".csv"):
             fPathLoopStop = True
         else:
             print("Oops, you didn't enter a valid file path/file name. Please try again!")
@@ -29,7 +30,13 @@ def generate_credential_dir():
     outputFile_path = json_filePath["output_file_path"]
 
     # open password list binary file
-    password_list = open(outputFile_path + f"{filePathSeparator}password_list.bin", "rb")
+    try:
+        password_list = open(outputFile_path + f"{filePathSeparator}password_list.bin", "rb")
+    except:
+        print("\nIt looks like you haven't generated any passwords yet! Please select Option 1 for the password generator.")
+        quit()
+
+    # password_list = open(outputFile_path + f"{filePathSeparator}password_list.bin", "rb")
     passwordFileData = list(password_list)
 
     database = r"pythonsqlite.db"

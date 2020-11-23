@@ -69,7 +69,16 @@ def decrypt_passwords():
     f = Fernet(key)
     # input_file = open(f'{output_file_path}\\password_list.bin', "rb").read()
     output_file_path = load_json_config()["output_file_path"]
-    input_file = open(f'{output_file_path}{filePathSeparator}password_list.bin', "rb").read()
+
+    decryptLoopStop = False
+    while not decryptLoopStop:
+        try:
+            input_file = open(f'{output_file_path}{filePathSeparator}password_list.bin', "rb").read()
+            decryptLoopStop = True
+        except:
+            print("It looks like you haven't generated any passwords yet! Please select Option 1 to generate passwords.")
+            quit()
+
     print("")
     for password in input_file.splitlines():
         decrypted_password = f.decrypt(bytes(password))
