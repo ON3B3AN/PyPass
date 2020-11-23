@@ -12,16 +12,16 @@ else:
 
 
 def load_json_config():
-    configFile = open('pmConfig.json','r')
+    configFile = open('pmConfig.json', 'r')
     filePaths = json.load(configFile)
     configFile.close()
     return filePaths
 
 jsonConfig = load_json_config()
 rm_media_path = Path(jsonConfig["rm_media_path"])
-print("Configured Removable Media File Path:", rm_media_path)
+# print("Configured Removable Media File Path:", rm_media_path)
 output_file_path = Path(jsonConfig["output_file_path"])
-print("Configured Password Output File Path:", output_file_path)
+# print("Configured Password Output File Path:", output_file_path)
 
 
 def get_output_file_path():

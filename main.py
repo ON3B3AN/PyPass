@@ -29,7 +29,7 @@ def main_menu():
     2. View Passwords
     3. Generate Credential Dictionary
     4. View Credential Dictionary
-    5. Modify path configurations
+    5. Modify Path Configurations
     6. Exit
     """)
     option = input("Enter an option: ")
@@ -42,10 +42,10 @@ def main_menu():
     elif option == "4":
         pass
     elif option == "5":
-        print(colored("\nFile Path Configuration Menu", "grey", attrs=['bold', 'underline']))
+        print(colored("\nPath Configuration Menu", "grey", attrs=['bold', 'underline']))
         print("""
-    1. Modify the removable disk path
-    2. Modify output file path
+    1. Modify Removable Media Path
+    2. Modify Output File Path
         """)
         option = input("Enter an option: ")
         if option == "1":
