@@ -56,7 +56,7 @@ def main_menu():
             fPath.changeRmMediaPath()
         elif option == "2":
             fPath.changePwdOutputFilePath()
-    elif option == "6":
+    elif option == "7":
         sys.exit()
 
 
