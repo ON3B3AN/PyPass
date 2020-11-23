@@ -1,17 +1,13 @@
 import passwordStrengthTest as test
 from termcolor import colored
 from encryptDecrypt import *
-# import encryptDecrypt as crypt
 import random
-from pathlib import Path
-import os
 
 
 def generate_passwords():
     generate_key()
-    # output_file = get_output_file_path()
     output_file_path = get_output_file_path()
-    output_file = open(f"{output_file_path}{filePathSeparator}password_list.bin","wb")
+    output_file = open(f"{output_file_path}{filePathSeparator}password_list.bin", "wb")
     print("[passwordGenerator.py] The output_file is:", output_file)
     uppercase_letters = "ABCDEFGHIJKLNMOPQRSTUVWXYZ"
     lowercase_letters = uppercase_letters.lower()
@@ -46,7 +42,6 @@ def generate_passwords():
             print("[passwordGenerator.py] Length of password is", length, ", which is less than 8! Please try again...")
         else:
             lenLoopStop = True
-
 
     def add_symbols(answer):
         if answer.upper() == "Y" or answer.lower() == "y":
@@ -98,4 +93,3 @@ def generate_passwords():
 
     generate_password(add_symbols(input("Use symbols? (y/n): ")),
                       add_ambiguous_characters(input("Use ambiguous characters? (y/n): ")))
-
