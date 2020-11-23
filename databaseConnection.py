@@ -1,3 +1,5 @@
+# Portions of this file referenced from: https://www.sqlitetutorial.net/sqlite-python/
+
 import sqlite3
 from sqlite3 import Error
 from encryptDecrypt import decrypt_passwords
