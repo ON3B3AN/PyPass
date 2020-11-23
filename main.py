@@ -21,6 +21,7 @@ def main_menu():
 ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║  ██║     
 ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝     
     """, "yellow", attrs=['bold']))
+    fPath.checkConfigPaths()
     print(colored("Main Menu", "grey", attrs=['bold', 'underline']))
     print("""
     1. Generate Passwords
