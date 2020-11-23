@@ -34,7 +34,7 @@ def changeRmMediaPath():
             configFile.close()
             rmFileLoopStop = False
         else:
-            print("Oops, that's not a valid file path. Please try again!")
+            print("Oops, that's an invalid file path, or it does not exist! Make sure your removable media is plugged in. Please try again!")
 
 
 def changePwdOutputFilePath():
