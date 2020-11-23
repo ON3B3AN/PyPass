@@ -6,18 +6,12 @@ configFile = open('pmConfig.json', 'r')
 filePath = json.load(configFile)
 configFile.close()
 
-
-# print("You are running", platform.system())
-
 if platform.system() == "Windows":
     filePathSeparator = "\\"
     rmDiskSuffix = ":\\"
 else:
     filePathSeparator = "/"
     rmDiskSuffix = "/"
-
-# print("filePathSuffix:", filePathSeparator)
-# print("rmDiskSuffix:", rmDiskSuffix)
 
 
 def changeRmMediaPath():
@@ -36,30 +30,6 @@ def changeRmMediaPath():
             print("Oops, that's an invalid file path, or it does not exist! Make sure your removable media is plugged in. Please try again!")
 
 
-def changePwdOutputFilePath():
-    print("Changing Password output File Path")
-    outputFileLoopStop = True
-    while outputFileLoopStop:
-        output_file_path = Path(input("Enter file path for output file pwd list: ") + filePathSeparator)
-        print("The output path for the passwords list is:", output_file_path)
-        if output_file_path.exists():
-            # Modify config file (pmConfig.py)
-            filePath["output_file_path"] = str(output_file_path)
-            configFile = open('pmConfig.json', 'w')
-            json.dump(filePath, configFile)
-            configFile.close()
-            outputFileLoopStop = False
-        else:
-            print("Oops, that's not a valid file path. Please try again!")
-
-
 def checkConfigPaths():
     if filePath["rm_media_path"] == "":
         changeRmMediaPath()
-    # else:
-    #     print("Path for removable media is present!")
-
-    if filePath["output_file_path"] == "":
-        changePwdOutputFilePath()
-    # else:
-    #     print("Path for password list file is present!")

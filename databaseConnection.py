@@ -1,5 +1,6 @@
 import sqlite3
 from sqlite3 import Error
+from encryptDecrypt import decrypt_passwords
 
 
 def create_connection(db_file):
@@ -39,7 +40,7 @@ def create_credentials(conn, creds):
     :return:
     """
 
-    sql = ''' INSERT INTO credentials (username, website, password)
+    sql = ''' INSERT INTO credential (username, website, password)
               VALUES(?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, creds)
@@ -47,20 +48,20 @@ def create_credentials(conn, creds):
     return cur.lastrowid
 
 
-def select_task_by_priority(conn, creds):
+def select_all_credentials():
     """
     Query tasks by priority
     :param conn: the Connection object
-    :param creds:
     :return:
     """
+    conn = create_connection("pythonsqlite.db")
     cur = conn.cursor()
-    cur.execute("SELECT * FROM tasks WHERE priority=?", (priority,))
+    cur.execute("SELECT * FROM credential")
 
     rows = cur.fetchall()
-
+    print("")
     for row in rows:
-        print(row)
+        decrypt_passwords(row)
 
 
 def clear_password_db():
@@ -68,23 +69,29 @@ def clear_password_db():
     Delete all rows in the tasks table
     :return:
     """
-    decision = input("You are about to clear your Credential Dictionary of all saved websites, usernames, and passwords."
-                     " Are you sure you want to do this? (Yy/Nn) ")
-
-    if decision == "Y" or decision == "y":
-        database = r"pythonsqlite.db"
-        conn = create_connection(database)
-        sql = 'DELETE FROM credentials'
-        cur = conn.cursor()
-        cur.execute(sql)
-        conn.commit()
-        print("Credential Dictionary has been cleared!")
+    decision = input("You are about to clear your Credential Dictionary of all saved websites, usernames, and passwords.\n"
+                     "Are you sure you want to do this? (y/n) ")
+    loopStop = False
+    while not loopStop:
+        if decision == "Y" or decision == "y":
+            database = r"pythonsqlite.db"
+            conn = create_connection(database)
+            sql = 'DELETE FROM credential'
+            cur = conn.cursor()
+            cur.execute(sql)
+            conn.commit()
+            print("Credential Dictionary has been cleared!")
+            loopStop = True
+            return True
+        else:
+            break
+            return False
 
 
 def main():
     database = r"pythonsqlite.db"
 
-    sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS credentials (
+    sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS credential (
                                         cred_id integer PRIMARY KEY AUTOINCREMENT,
                                         username text NOT NULL,
                                         website text NOT NULL,
@@ -101,5 +108,6 @@ def main():
 
     else:
         print("Error! cannot create the database connection.")
+
 
 main()

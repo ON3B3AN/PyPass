@@ -4,11 +4,11 @@ from encryptDecrypt import *
 import random
 
 
-def generate_passwords():
-    generate_key()
-    output_file_path = get_output_file_path()
-    output_file = open(f"{output_file_path}{filePathSeparator}password_list.bin", "wb")
-    print("The output_file is:", output_file)
+def generate_passwords(num, update):
+    if not update:
+        generate_key()
+
+    output_file = open("password_list.bin", "wb")
     uppercase_letters = "ABCDEFGHIJKLNMOPQRSTUVWXYZ"
     lowercase_letters = uppercase_letters.lower()
     digits = "0123456789"
@@ -19,13 +19,7 @@ def generate_passwords():
 
     numLoopStop = False
     while not numLoopStop:
-        try:
-            number = int(input("Enter the number of passwords to generate: "))
-        except:
-            print("You did not enter a valid Integer; please try again!")
-            continue
-
-        if not number > 1:
+        if not num > 1:
             print("Number of passwords must be more than 1! Please try again...")
         else:
             numLoopStop = True
@@ -79,7 +73,7 @@ def generate_passwords():
         print(" ")
 
         i = 1
-        while i <= number:
+        while i <= num:
             i += 1
             pwd = "".join(random.sample(password, length))
             if test.validate_password_strength(pwd):

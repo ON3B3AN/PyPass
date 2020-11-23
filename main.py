@@ -1,6 +1,4 @@
-import passwordGenerator as passGen
 from termcolor import colored
-import encryptDecrypt as crypt
 import changeFilePaths as fPath
 import credentialDirectoryGenerator as credDir
 import databaseConnection as db
@@ -26,36 +24,37 @@ def main_menu():
     fPath.checkConfigPaths()
     print(colored("Main Menu", "grey", attrs=['bold', 'underline']))
     print("""
-    1. Generate Passwords
-    2. View Passwords
-    3. Generate Credential Dictionary
-    4. View Credential Dictionary
-    5. Modify Path Configurations
-    6. Exit
+    1. Manage Credential Dictionary
+    2. View Credential Dictionary
+    3. Clear Credential Dictionary
+    4. Modify Path Configurations
+    5. Exit
     """)
     option = input("Enter an option: ")
     if option == "1":
-        passGen.generate_passwords()
+        print(colored("\nCredential Dictionary Menu", "grey", attrs=['bold', 'underline']))
+        print("""
+    1. Add To Existing Credential Dictionary
+    2. Create New Credential Dictionary
+            """)
+        option = input("Enter an option [press <enter> for main menu]: ")
+        if option == "1":
+            credDir.generate_credential_dir(True)
+        if option == "2":
+            credDir.generate_credential_dir(False)
     elif option == "2":
-        crypt.decrypt_passwords()
+        db.select_all_credentials()
     elif option == "3":
-        credDir.generate_credential_dir()
-    elif option == "4":
-        pass
-    elif option == "5":
         db.clear_password_db()
-    elif option == "6":
+    elif option == "4":
         print(colored("\nFile Path Configuration Menu", "grey", attrs=['bold', 'underline']))
         print("""
     1. Modify Removable Media Path
-    2. Modify Output File Path
         """)
-        option = input("Enter an option: ")
+        option = input("Enter an option [press <enter> for main menu]: ")
         if option == "1":
             fPath.changeRmMediaPath()
-        elif option == "2":
-            fPath.changePwdOutputFilePath()
-    elif option == "7":
+    elif option == "5":
         sys.exit()
 
 

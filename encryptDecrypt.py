@@ -19,15 +19,6 @@ def load_json_config():
 
 jsonConfig = load_json_config()
 rm_media_path = Path(jsonConfig["rm_media_path"])
-# print("Configured Removable Media File Path:", rm_media_path)
-output_file_path = Path(jsonConfig["output_file_path"])
-# print("Configured Password Output File Path:", output_file_path)
-
-
-def get_output_file_path():
-    jsonConfig = load_json_config()
-    output_file_path = Path(jsonConfig["output_file_path"])
-    return output_file_path
 
 
 def generate_key():
@@ -61,25 +52,12 @@ def encrypt_password(password, output_file):
     output_file.write("\n".encode())
 
 
-def decrypt_passwords():
+def decrypt_passwords(password):
     """
     Decrypts encrypted passwords
     """
     key = load_key()
     f = Fernet(key)
-    # input_file = open(f'{output_file_path}\\password_list.bin', "rb").read()
-    output_file_path = load_json_config()["output_file_path"]
 
-    decryptLoopStop = False
-    while not decryptLoopStop:
-        try:
-            input_file = open(f'{output_file_path}{filePathSeparator}password_list.bin', "rb").read()
-            decryptLoopStop = True
-        except:
-            print("It looks like you haven't generated any passwords yet! Please select Option 1 to generate passwords.")
-            quit()
-
-    print("")
-    for password in input_file.splitlines():
-        decrypted_password = f.decrypt(bytes(password))
-        print(decrypted_password.decode())
+    decrypted_password = f.decrypt(bytes(password[3]))
+    print("Username: " + str(password[1]) + " Website: " + str(password[2]) + " Password: " + decrypted_password.decode())
