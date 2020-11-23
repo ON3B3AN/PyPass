@@ -3,6 +3,7 @@ from termcolor import colored
 import encryptDecrypt as crypt
 import changeFilePaths as fPath
 import credentialDirectoryGenerator as credDir
+import databaseConnection as db
 import sys
 
 
@@ -29,8 +30,9 @@ def main_menu():
     2. View Passwords
     3. Generate Credential Dictionary
     4. View Credential Dictionary
-    5. Modify path configurations
-    6. Exit
+    5. Clear Credential Dictionary
+    6. Modify path configurations
+    7. Exit
     """)
     option = input("Enter an option: ")
     if option == "1":
@@ -42,6 +44,8 @@ def main_menu():
     elif option == "4":
         pass
     elif option == "5":
+        db.clear_password_db()
+    elif option == "6":
         print(colored("\nFile Path Configuration Menu", "grey", attrs=['bold', 'underline']))
         print("""
     1. Modify the removable disk path

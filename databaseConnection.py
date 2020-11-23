@@ -68,15 +68,21 @@ def main():
     else:
         print("Error! cannot create the database connection.")
 
-def clear_password_db(conn):
+def clear_password_db():
     """
     Delete all rows in the tasks table
-    :param conn: Connection to the SQLite database
     :return:
     """
-    sql = 'DELETE FROM credentials'
-    cur = conn.cursor()
-    cur.execute(sql)
-    conn.commit()
+    decision = input("You are about to clear your Credential Dictionary of all saved websites, usernames, and passwords."
+                     " Are you sure you want to do this? (Yy/Nn) ")
+
+    if decision == "Y" or decision == "y":
+        database = r"pythonsqlite.db"
+        conn = create_connection(database)
+        sql = 'DELETE FROM credentials'
+        cur = conn.cursor()
+        cur.execute(sql)
+        conn.commit()
+        print("Credential Dictionary has been cleared!")
 
 main()
