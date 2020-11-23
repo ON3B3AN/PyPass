@@ -8,7 +8,7 @@ def generate_passwords():
     generate_key()
     output_file_path = get_output_file_path()
     output_file = open(f"{output_file_path}{filePathSeparator}password_list.bin", "wb")
-    print("[passwordGenerator.py] The output_file is:", output_file)
+    print("The output_file is:", output_file)
     uppercase_letters = "ABCDEFGHIJKLNMOPQRSTUVWXYZ"
     lowercase_letters = uppercase_letters.lower()
     digits = "0123456789"
@@ -22,11 +22,11 @@ def generate_passwords():
         try:
             number = int(input("Enter the number of passwords to generate: "))
         except:
-            print("[passwordGenerator.py] You did not enter a valid Integer; please try again!")
+            print("You did not enter a valid Integer; please try again!")
             continue
 
         if not number > 1:
-            print("[passwordGenerator.py] Number of passwords must be more than 1! Please try again...")
+            print("Number of passwords must be more than 1! Please try again...")
         else:
             numLoopStop = True
 
@@ -35,11 +35,11 @@ def generate_passwords():
         try:
             length = int(input("Enter your desired password length (min: 8): "))
         except:
-            print("[passwordGenerator.py] You did not enter a valid Integer; please try again!")
+            print("You did not enter a valid Integer; please try again!")
             continue
 
         if length < 8:
-            print("[passwordGenerator.py] Length of password is", length, ", which is less than 8! Please try again...")
+            print("Length of password is", length, ", which is less than 8! Please try again...")
         else:
             lenLoopStop = True
 

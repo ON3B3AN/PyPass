@@ -2,3 +2,5 @@ __pycache__
 pmConfig.json
 password_list.bin
 .idea
+username_website_list.csv
+pythonsqlite.db

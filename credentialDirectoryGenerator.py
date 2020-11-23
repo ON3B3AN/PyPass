@@ -20,7 +20,7 @@ def generate_credential_dir():
     userFileReader = csv.reader(userFile)
     userFileData = list(userFileReader)
     userFile.close()
-    print(userFileData)
+    # print(userFileData)
 
     # open/read/store JSON config file in variable
     configFile = open('pmConfig.json', 'r')
@@ -40,4 +40,4 @@ def generate_credential_dir():
         credential = user_row[0], user_row[1], user_row[2]
         create_credentials(conn, credential)
         count += 1
-        print(user_row)
+        # print(user_row)
