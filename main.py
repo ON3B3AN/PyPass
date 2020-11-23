@@ -2,6 +2,7 @@ import passwordGenerator as passGen
 from termcolor import colored
 import encryptDecrypt as crypt
 import changeFilePaths as fPath
+import credentialDirectoryGenerator as credDir
 import sys
 
 
@@ -36,7 +37,7 @@ def main_menu():
     elif option == "2":
         crypt.decrypt_passwords()
     elif option == "3":
-        pass
+        credDir.generate_credential_dir()
     elif option == "4":
         print(colored("\nFile Path Configuration Menu", "grey", attrs=['bold', 'underline']))
         print("""
