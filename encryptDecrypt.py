@@ -1,3 +1,5 @@
+# Portions of this file referenced from: https://devqa.io/encrypt-decrypt-data-python/
+
 from cryptography.fernet import Fernet
 from pathlib import Path
 import platform
