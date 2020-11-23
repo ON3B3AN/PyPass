@@ -3,6 +3,7 @@ from termcolor import colored
 import encryptDecrypt as crypt
 import changeFilePaths as fPath
 import credentialDirectoryGenerator as credDir
+import databaseConnection as db
 import sys
 
 
@@ -42,7 +43,9 @@ def main_menu():
     elif option == "4":
         pass
     elif option == "5":
-        print(colored("\nPath Configuration Menu", "grey", attrs=['bold', 'underline']))
+        db.clear_password_db()
+    elif option == "6":
+        print(colored("\nFile Path Configuration Menu", "grey", attrs=['bold', 'underline']))
         print("""
     1. Modify Removable Media Path
     2. Modify Output File Path
@@ -52,7 +55,7 @@ def main_menu():
             fPath.changeRmMediaPath()
         elif option == "2":
             fPath.changePwdOutputFilePath()
-    elif option == "6":
+    elif option == "7":
         sys.exit()
 
 

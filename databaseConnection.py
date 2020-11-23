@@ -47,6 +47,40 @@ def create_credentials(conn, creds):
     return cur.lastrowid
 
 
+def select_task_by_priority(conn, creds):
+    """
+    Query tasks by priority
+    :param conn: the Connection object
+    :param creds:
+    :return:
+    """
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM tasks WHERE priority=?", (priority,))
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
+
+
+def clear_password_db():
+    """
+    Delete all rows in the tasks table
+    :return:
+    """
+    decision = input("You are about to clear your Credential Dictionary of all saved websites, usernames, and passwords."
+                     " Are you sure you want to do this? (Yy/Nn) ")
+
+    if decision == "Y" or decision == "y":
+        database = r"pythonsqlite.db"
+        conn = create_connection(database)
+        sql = 'DELETE FROM credentials'
+        cur = conn.cursor()
+        cur.execute(sql)
+        conn.commit()
+        print("Credential Dictionary has been cleared!")
+
+
 def main():
     database = r"pythonsqlite.db"
 
@@ -67,6 +101,5 @@ def main():
 
     else:
         print("Error! cannot create the database connection.")
-
 
 main()
