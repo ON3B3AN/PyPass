@@ -27,9 +27,10 @@ def main_menu():
     print("""
     1. Generate Passwords
     2. View Passwords
-    3. Create Credential Dictionary
-    4. Modify path configurations
-    5. Exit
+    3. Generate Credential Dictionary
+    4. View Credential Dictionary
+    5. Modify path configurations
+    6. Exit
     """)
     option = input("Enter an option: ")
     if option == "1":
@@ -39,6 +40,8 @@ def main_menu():
     elif option == "3":
         credDir.generate_credential_dir()
     elif option == "4":
+        pass
+    elif option == "5":
         print(colored("\nFile Path Configuration Menu", "grey", attrs=['bold', 'underline']))
         print("""
     1. Modify the removable disk path
@@ -49,7 +52,7 @@ def main_menu():
             fPath.changeRmMediaPath()
         elif option == "2":
             fPath.changePwdOutputFilePath()
-    elif option == "5":
+    elif option == "6":
         sys.exit()
 
 
