@@ -2,9 +2,5 @@ __pycache__
 pmConfig.json
 password_list.bin
 .idea
-<<<<<<< HEAD
 user.csv
 pythonsqlite.db
-=======
-pythonsqlite.db
->>>>>>> 870b3cb07b82f067e0794f0ffbdebc924db49a0b
