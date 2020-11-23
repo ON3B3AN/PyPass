@@ -48,3 +48,6 @@ def generate_credential_dir():
         create_credentials(conn, credential)
         count += 1
         print(user_row)
+
+def view_cred_dictionary():
+    print("")
