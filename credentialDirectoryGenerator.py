@@ -13,7 +13,7 @@ def generate_credential_dir():
         else:
             print("Oops, you didn't enter a valid file path/file name. Please try again!")
 
-    userFile = open(filePath,'r')
+    userFile = open(filePath, 'r')
     userFileReader = csv.reader(userFile)
     userFileData = list(userFileReader)
     userFile.close()
