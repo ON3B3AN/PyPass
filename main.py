@@ -24,10 +24,8 @@ def main_menu():
     print(colored("Main Menu", "grey", attrs=['bold', 'underline']))
     print("""
     1. Manage Credential Dictionary
-    2. View Credential Dictionary
-    3. Clear Credential Dictionary
-    4. Modify Path Configurations
-    5. Exit
+    2. Modify Removable Media Path
+    3. Exit
     """)
     option = input("Enter an option: ")
     if option == "1":
@@ -35,6 +33,8 @@ def main_menu():
         print("""
     1. Add To Existing Credential Dictionary
     2. Create New Credential Dictionary
+    3. View Credential Dictionary
+    4. Clear Credential Dictionary
             """)
         option = input("Enter an option [press <enter> for main menu]: ")
         if option == "1":
@@ -44,19 +44,13 @@ def main_menu():
                 print(colored("No Credential Dictionary was found. Please create one before adding to it.", "red", attrs=["bold"]))
         if option == "2":
             credDir.generate_credential_dir(False)
+        if option == "3":
+            db.select_all_credentials()
+        if option == "4":
+            db.clear_password_db()
     elif option == "2":
-        db.select_all_credentials()
+        fPath.changeRmMediaPath()
     elif option == "3":
-        db.clear_password_db()
-    elif option == "4":
-        print(colored("\nFile Path Configuration Menu", "grey", attrs=['bold', 'underline']))
-        print("""
-    1. Modify Removable Media Path
-        """)
-        option = input("Enter an option [press <enter> for main menu]: ")
-        if option == "1":
-            fPath.changeRmMediaPath()
-    elif option == "5":
         sys.exit()
 
 
