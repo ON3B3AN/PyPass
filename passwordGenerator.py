@@ -4,7 +4,7 @@ from encryptDecrypt import *
 import random
 
 
-def generate_passwords(num, update):
+def configure_passwords(num, update):
     if not update:
         generate_key()
 

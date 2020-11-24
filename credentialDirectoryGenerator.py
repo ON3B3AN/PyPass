@@ -2,7 +2,7 @@ import csv
 import os
 import json
 from databaseConnection import create_connection, create_credentials, clear_password_db
-from passwordGenerator import generate_passwords
+from passwordGenerator import configure_passwords
 from termcolor import colored
 
 
@@ -42,7 +42,7 @@ def generate_credential_dir(update):
     # clear empty sets in a list
     username_list = list(filter(None, userFileData))
     num_usernames = len(username_list)
-    generate_passwords(num_usernames, update)
+    configure_passwords(num_usernames, update)
     userFile.close()
 
     # open/read/store JSON config file in variable
