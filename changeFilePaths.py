@@ -18,7 +18,7 @@ else:
 def changeRmMediaPath():
     rmFileLoopStop = True
     while rmFileLoopStop:
-        rm_media_path = Path(input("Enter drive letter for removable media: ") + rmDiskSuffix)
+        rm_media_path = Path(input("Enter drive letter or path for removable media: ") + rmDiskSuffix)
         print("The path for removable media is:", rm_media_path, "\n")
         if rm_media_path.exists():
             filePath["rm_media_path"] = str(rm_media_path)

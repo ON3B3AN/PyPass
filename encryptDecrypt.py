@@ -104,7 +104,7 @@ def backup_decrypt_passwords(credentials):
 
     fPathLoopStop = False
     while not fPathLoopStop:
-        backup_path = input("Enter fully qualified path to store backup Credential Dictionary: ")
+        backup_path = input("Enter path to backup Credential Dictionary: ")
         if os.path.exists(backup_path):
             wb.save(f'{backup_path}{filePathSeparator}PyPass_Credential_Dictionary.xls')
             print("\n" + colored("Successfully backed up Credential Dictionary!", "green", attrs=["bold"]) +

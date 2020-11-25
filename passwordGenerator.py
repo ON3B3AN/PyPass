@@ -1,5 +1,5 @@
 import passwordStrengthTest as test
-from termcolor import colored
+# from termcolor import colored
 from encryptDecrypt import *
 import random
 
