@@ -1,9 +1,12 @@
 # Portions of this file referenced from: https://devqa.io/encrypt-decrypt-data-python/
 
+import xlwt
+from xlwt import Workbook
 from cryptography.fernet import Fernet
 from pathlib import Path
 import platform
 import json
+import os
 from termcolor import colored
 
 if platform.system() == "Windows":
@@ -68,3 +71,44 @@ def decrypt_passwords(password):
           colored(str(password[2]), "blue", attrs=["bold", "underline"]) +
           colored("  Password: ", "white", attrs=["bold"]) + colored("{", "green", attrs=["bold"]) +
           colored(decrypted_password.decode(), "white", attrs=["concealed"]) + colored("}", "green", attrs=["bold"]))
+
+
+def backup_decrypt_passwords(credentials):
+    """
+    Decrypts encrypted passwords and makes a backup file
+    """
+    key = load_key()
+    f = Fernet(key)
+
+    # Workbook is created
+    wb = Workbook()
+
+    # add_sheet is used to create sheet
+    sheet1 = wb.add_sheet('Sheet 1')
+
+    # Specifying style
+    style = xlwt.easyxf('font: bold 1')
+
+    # headers
+    sheet1.write(0, 0, 'Username', style)
+    sheet1.write(0, 1, 'Website', style)
+    sheet1.write(0, 2, 'Password', style)
+
+    row_num = 1
+    for index in credentials:
+        decrypted_password = f.decrypt(bytes(index[3]))
+        sheet1.write(row_num, 0, index[1])
+        sheet1.write(row_num, 1, index[2])
+        sheet1.write(row_num, 2, decrypted_password.decode())
+        row_num += 1
+
+    fPathLoopStop = False
+    while not fPathLoopStop:
+        backup_path = input("Enter fully qualified path to store backup Credential Dictionary: ")
+        if os.path.exists(backup_path):
+            wb.save(f'{backup_path}{filePathSeparator}PyPass_Credential_Dictionary.xls')
+            print("\n" + colored("Successfully backed up Credential Dictionary!", "green", attrs=["bold"]) +
+                  f"\nBackup located at: {backup_path}{filePathSeparator}PyPass_Credential_Dictionary.xls")
+            fPathLoopStop = True
+        else:
+            print(colored("Oops, you didn't enter a valid file path. Please try again!", "red", attrs=['bold']))

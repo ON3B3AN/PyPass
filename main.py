@@ -36,6 +36,7 @@ def main_menu():
     2. Create New Credential Dictionary
     3. View Credential Dictionary
     4. Clear Credential Dictionary
+    5. Backup Credential Dictionary
             """)
         option = input("Enter an option [press <enter> for main menu]: ")
         if option == "1":
@@ -49,6 +50,8 @@ def main_menu():
             db.select_all_credentials()
         if option == "4":
             db.clear_password_db()
+        if option == "5":
+            db.backup_all_credentials()
     elif option == "2":
         fPath.changeRmMediaPath()
     elif option == "3":

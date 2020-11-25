@@ -2,7 +2,7 @@
 
 import sqlite3
 from sqlite3 import Error
-from encryptDecrypt import decrypt_passwords
+from encryptDecrypt import decrypt_passwords, backup_decrypt_passwords
 from termcolor import colored
 
 
@@ -65,6 +65,20 @@ def select_all_credentials():
     print("")
     for row in rows:
         decrypt_passwords(row)
+
+
+def backup_all_credentials():
+    """
+    Query tasks by priority
+    :param conn: the Connection object
+    :return:
+    """
+    conn = create_connection("pythonsqlite.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM credential")
+
+    rows = cur.fetchall()
+    backup_decrypt_passwords(rows)
 
 
 def clear_password_db():
