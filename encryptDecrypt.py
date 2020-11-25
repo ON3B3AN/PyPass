@@ -4,6 +4,7 @@ from cryptography.fernet import Fernet
 from pathlib import Path
 import platform
 import json
+from termcolor import colored
 
 if platform.system() == "Windows":
     filePathSeparator = "\\"
@@ -62,4 +63,8 @@ def decrypt_passwords(password):
     f = Fernet(key)
 
     decrypted_password = f.decrypt(bytes(password[3]))
-    print("Username: " + str(password[1]) + " Website: " + str(password[2]) + " Password: " + decrypted_password.decode())
+    print(colored("Username: ", "white", attrs=["bold"]) + colored(str(password[1]), "grey", attrs=["bold"]) +
+          colored("  Website: ", "white", attrs=["bold"]) +
+          colored(str(password[2]), "blue", attrs=["bold", "underline"]) +
+          colored("  Password: ", "white", attrs=["bold"]) + colored("{", "green", attrs=["bold"]) +
+          colored(decrypted_password.decode(), "white", attrs=["concealed"]) + colored("}", "green", attrs=["bold"]))
