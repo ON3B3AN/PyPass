@@ -1,5 +1,5 @@
 # PyPass
-A password manager built in Python that generates encrypted passwords and stores them in a database for easy access.
+A password manager built in Python that generates encrypted, strength-tested passwords that are merged with a user’s CSV file containing usernames and websites. This completed Credential Dictionary is stored in a database that is accessible using two-factor authentication with removable media.
 
 ## Authors
 Travis Thayer & Sal Trupiano
