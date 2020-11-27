@@ -1,5 +1,4 @@
 import passwordStrengthTest as test
-# from termcolor import colored
 from encryptDecrypt import *
 import random
 
@@ -82,8 +81,8 @@ def configure_passwords(num, update):
             else:
                 i -= 1
                 miss += 1
-        print("\nPasswords accepted " + "{" + colored(str(hit), "green", attrs=['bold']) + "}." +
-              " Passwords rejected " + "{" + colored(str(miss), "red", attrs=['bold']) + "}." + "\n")
+        print("Passwords accepted " + "{" + colored(str(hit), "green", attrs=['bold']) + "}." +
+              " Passwords rejected " + "{" + colored(str(miss), "red", attrs=['bold']) + "}.")
 
     generate_password(add_symbols(input("Use symbols? (y/n): ")),
                       add_ambiguous_characters(input("Use ambiguous characters? (y/n): ")))

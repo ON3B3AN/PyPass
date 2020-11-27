@@ -12,8 +12,7 @@ def generate_credential_dir(update):
 ***********************************************************************************
                                Instructions:
   • Create and save a csv file that contains usernames and websites in that order
-***********************************************************************************
-                """)
+***********************************************************************************""")
         # clear credential table is not updating
         terminate = clear_password_db()
     elif update:

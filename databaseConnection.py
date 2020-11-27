@@ -63,6 +63,8 @@ def select_all_credentials():
 
     rows = cur.fetchall()
     print("")
+    if not rows:
+        print(colored("Error, Credential Dictionary is empty!", "red", attrs=["bold"]))
     for row in rows:
         decrypt_passwords(row)
 
@@ -86,7 +88,7 @@ def clear_password_db():
     Delete all rows in the tasks table
     :return:
     """
-    decision = input(colored("Warning! If Credential Dictionary already exists, then all saved websites, usernames, and passwords will be deleted!\n", "yellow", attrs=["bold"]) +
+    decision = input(colored("\nWarning! If Credential Dictionary already exists, then all saved websites, usernames, and passwords will be deleted!\n", "yellow", attrs=["bold"]) +
                      "Are you sure you want to do this? (y/n) ")
     loopStop = False
     while not loopStop:

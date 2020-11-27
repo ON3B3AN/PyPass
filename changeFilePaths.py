@@ -29,7 +29,7 @@ def changeRmMediaPath():
                     # The following command only works for Linux and WSL
                     os.system(f"sudo mount -t drvfs {drive_letter}: /mnt/{drive_letter}")
                     print(colored(f"{rm_media_path} mounted successfully!\n"))
-            print("The path for removable media is:", rm_media_path, "\n")
+            print("The path for removable media is:", rm_media_path)
             filePath["rm_media_path"] = str(rm_media_path)
             configFile = open('pmConfig.json', 'w')
             json.dump(filePath, configFile)

@@ -8,7 +8,8 @@ from pathlib import Path
 
 def main_menu():
     print(colored("""
-    
+
+
  ███████████             ███████████                           
 ░░███░░░░░███           ░░███░░░░░███                          
  ░███    ░███ █████ ████ ░███    ░███  ██████    █████   █████ 
@@ -30,15 +31,16 @@ def main_menu():
     """)
     option = input("Enter an option: ")
     if option == "1":
-        print(colored("\nCredential Dictionary Menu", "grey", attrs=['bold', 'underline']))
-        print("""
-    1. Add To Existing Credential Dictionary
-    2. Create New Credential Dictionary
-    3. View Credential Dictionary
-    4. Clear Credential Dictionary
-    5. Backup Credential Dictionary
+        sub_menu = colored("""Credential Dictionary Menu\n""", "grey", attrs=['bold', 'underline'])
+        print(f"""
+        {sub_menu}
+        1. Add To Existing Credential Dictionary
+        2. Create New Credential Dictionary
+        3. View Credential Dictionary
+        4. Clear Credential Dictionary
+        5. Backup Credential Dictionary
             """)
-        option = input("Enter an option [press <enter> for main menu]: ")
+        option = input("Enter an option [press <enter> for Main Menu]: ")
         if option == "1":
             if Path(fPath.get_rm_media_path()).exists():
                 credDir.generate_credential_dir(True)
