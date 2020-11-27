@@ -7,23 +7,22 @@ from termcolor import colored
 
 
 def generate_credential_dir(update):
-    print("""
+    if not update:
+        print("""
 ***********************************************************************************
                                Instructions:
   • Create and save a csv file that contains usernames and websites in that order
-  • If appending to an existing Credential Dictionary,
-    then csv that contains usernames and websites must only contain NEW entries
 ***********************************************************************************
-        """)
-
-    if not update:
-        # return to main menu if user output is no (false)
+                """)
+        # clear credential table is not updating
         terminate = clear_password_db()
+    elif update:
+        print(colored("\nWarning! Csv file containing usernames and websites must only contain NEW entries!", "yellow", attrs=["bold"]))
+        terminate = update
     else:
         terminate = update
 
     if not terminate:
-        # os.remove("password_list.bin")
         return
 
     fPathLoopStop = False
