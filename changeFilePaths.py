@@ -25,7 +25,8 @@ def changeRmMediaPath():
             if not os.listdir(Path(rm_media_path)):
                 option_1 = input("Would you like to mount this removable drive? (y/n): ")
                 if option_1 == "Y" or option_1 == "y":
-                    drive_letter = rm_media_path[-1]
+                    drive_letter = rm_media_path[-2]
+                    print(drive_letter)
                     # The following command only works for Linux and WSL
                     os.system(f"sudo mount -t drvfs {drive_letter}: /mnt/{drive_letter}")
                     print(colored(f"{rm_media_path} mounted successfully!\n"))

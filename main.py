@@ -23,7 +23,7 @@ def main_menu():
                ░░░░░░                                          
     """, "yellow", attrs=['bold']))
     fPath.checkConfigPaths()
-    print(colored("Main Menu", "grey", attrs=['bold', 'underline']))
+    print(colored("\nMain Menu", "grey", attrs=['bold', 'underline']))
     print("""
     1. Manage Credential Dictionary
     2. Modify Removable Media Path
