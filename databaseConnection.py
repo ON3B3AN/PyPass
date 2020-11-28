@@ -65,8 +65,8 @@ def select_all_credentials():
     print("")
     if not rows:
         print(colored("Error, Credential Dictionary is empty!", "red", attrs=["bold"]))
-    for row in rows:
-        decrypt_passwords(row)
+    # for row in rows:
+    decrypt_passwords(rows)
 
 
 def backup_all_credentials():

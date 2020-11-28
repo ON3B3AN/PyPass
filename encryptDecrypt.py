@@ -8,6 +8,7 @@ import platform
 import json
 import os
 from termcolor import colored
+from prettytable import PrettyTable
 
 if platform.system() == "Windows":
     filePathSeparator = "\\"
@@ -64,13 +65,15 @@ def decrypt_passwords(password):
     """
     key = load_key()
     f = Fernet(key)
-
-    decrypted_password = f.decrypt(bytes(password[3]))
-    print(colored("Username: ", "white", attrs=["bold"]) + colored(str(password[1]), "grey", attrs=["bold"]) +
-          colored("  Website: ", "white", attrs=["bold"]) +
-          colored(str(password[2]), "blue", attrs=["bold", "underline"]) +
-          colored("  Password: ", "white", attrs=["bold"]) + colored("{", "green", attrs=["bold"]) +
-          colored(decrypted_password.decode(), "white", attrs=["concealed"]) + colored("}", "green", attrs=["bold"]))
+    credential_table = PrettyTable(["Username", "Website", "Password"])
+    for index in password:
+        decrypted_password = f.decrypt(bytes(index[3]))
+        credential_table.add_row([colored(str(index[1]), "grey", attrs=["bold"]),
+                                  colored(str(index[2]), "blue", attrs=["bold", "underline"]),
+                                  colored("{", "green", attrs=["bold"]) +
+                                  colored(decrypted_password.decode(), "white", attrs=["concealed"]) +
+                                  colored("}", "green", attrs=["bold"])])
+    print(credential_table)
 
 
 def backup_decrypt_passwords(credentials):
