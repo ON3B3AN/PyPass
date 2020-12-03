@@ -35,7 +35,7 @@ def changeRmMediaPath():
 
 def mount_rm_media(rm_media_path):
     if Path(rm_media_path).exists():
-        # Assume if removable drive is empty, then the drive isn't mounted
+        # If removable drive is empty, assume the drive isn't mounted
         if not os.listdir(Path(rm_media_path)):
             option_1 = input("Would you like to mount this removable drive? (y/n): ")
             if option_1 == "Y" or option_1 == "y":
